@@ -16,8 +16,11 @@ function work_jobs() {
 
 function work_next_job() {
   redis.lpop('jobs', function(err, msg){
-    job = edn.parse(msg)
-    work_job(job)
+    // another worker may have taken the job
+    if(msg) {
+      job = edn.parse(msg)
+      work_job(job)
+    }
   })
 }
 

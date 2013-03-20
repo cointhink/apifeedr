@@ -30,14 +30,18 @@ function request_body_read(req, cb) {
 }
 
 function build_job(body) {
-  msg = JSON.parse(body)
-  var id = uuid.v4()
-  var job = { id: id,
-              method: msg.method,
-              params: []
-            }
-  if (msg.params) { job.params = msg.params }
-  return job
+  try {
+    msg = JSON.parse(body)
+    var id = uuid.v4()
+    var job = { id: id,
+                method: msg.method,
+                params: []
+              }
+    if (msg.params) { job.params = msg.params }
+    return job
+  } catch(e) {
+    console.log("bad json "+body)
+  }
 }
 
 function farm_out(job, cb){
