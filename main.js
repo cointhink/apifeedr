@@ -9,8 +9,8 @@ var uuid = require('node-uuid');
 var server = bouncy(function (req, res, bounce) {
   if (req.method == 'POST') {
     if (req.url == '/api') {
-      http_read(req, function(rpc) {
-        var job = build_job(rpc)
+      request_body_read(req, function(body) {
+        var job = build_job(body)
         farm_out(job, function(response_msg){
           respond(response_msg, res)
         })
@@ -19,20 +19,24 @@ var server = bouncy(function (req, res, bounce) {
   }
 })
 
-function http_read(req, cb) {
-  var msg = ""
-  req.on('data', function(d){
-    msg += String(d)
+function request_body_read(req, cb) {
+  var body = ""
+  req.on('data', function(data){
+    body += String(data)
   })
   req.on('end', function(){
-    cb(JSON.parse(msg))
+    cb(body)
   })
 }
 
-function build_job(rpc) {
+function build_job(body) {
+  msg = JSON.parse(body)
   var id = uuid.v4()
-  job = { id: id,
-          method: rpc.method}
+  var job = { id: id,
+              method: msg.method,
+              params: []
+            }
+  if (msg.params) { job.params = msg.params }
   return job
 }
 
@@ -63,4 +67,5 @@ function respond(response_msg, res){
   res.statusCode = 200;
   res.end(response);
 }
+
 server.listen(8000);
