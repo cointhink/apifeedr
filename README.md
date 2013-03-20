@@ -19,10 +19,9 @@ $ node main.js
 Start a worker
 ```
 $ node worker.js
-
 ```
 
-Start some work
+Start some work, using the JSON-RPC 2.0 format
 ```
-$ curl -X POST -d '{"method":"dosomething"}' http://localhost:8000/api
+$ curl -X POST -d '{"jsonrpc":"2.0","method":"dosomething"}' http://localhost:8000/api
 ```
