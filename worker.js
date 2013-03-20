@@ -24,7 +24,7 @@ function work_next_job() {
 function work_job(job) {
   console.log('working '+job.at('id'))
   answer = { id: job.at('id'),
-             values: [1,2,3]}
+             result: [1,2,3]}
   redis.publish(job.at('id'), edn.encode(answer))
 }
 

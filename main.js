@@ -62,7 +62,10 @@ function publish(job){
 
 function respond(response_msg, res){
   answer = edn.parse(response_msg)
-  response = JSON.stringify(edn.toJS(answer))
+  result = { jsonrpc: "2.0",
+             id: answer.at('id'),
+             result: edn.toJS(answer.at('result'))}
+  response = JSON.stringify(result)
   console.log('responding: '+response)
   res.statusCode = 200;
   res.end(response);
