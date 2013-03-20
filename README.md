@@ -11,12 +11,12 @@ $ cd bouncy-job-queue
 $ npm install
 ```
 
-Start the HTTP listener
+Start the HTTP listener (at the web head)
 ```
 $ node main.js
 ```
 
-Start a worker
+Start worker(s) (possibly on other boxes)
 ```
 $ node worker.js
 ```
