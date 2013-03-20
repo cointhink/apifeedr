@@ -14,9 +14,13 @@ var server = bouncy(function (req, res, bounce) {
     if (req.url == '/api') {
       request_body_read(req, function(body) {
         var job = build_job(body)
-        farm_out(job, function(response_msg){
-          respond(response_msg, res)
-        })
+        if (job) {
+          farm_out(job, function(response_msg){
+            respond(response_msg, res)
+          })
+        } else {
+          error_respond(res)
+        }
       })
     }
   }
@@ -74,6 +78,13 @@ function respond(response_msg, res){
              result: edn.toJS(answer.at('result'))}
   response = JSON.stringify(result)
   console.log('responding: '+response)
+  res.statusCode = 200;
+  res.end(response);
+}
+
+function error_respond(res){
+  result = { error: "error"}
+  response = JSON.stringify(result)
   res.statusCode = 200;
   res.end(response);
 }
