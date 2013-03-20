@@ -1,3 +1,4 @@
+var fs = require('fs');
 var edn = require("jsedn");
 var bouncy = require('bouncy');
 
@@ -5,6 +6,8 @@ var redisLib = require("redis"),
     system_redis = redisLib.createClient();
 
 var uuid = require('node-uuid');
+
+var settings = edn.parse(fs.readFileSync('settings.edn', 'utf8'))
 
 var server = bouncy(function (req, res, bounce) {
   if (req.method == 'POST') {
@@ -75,4 +78,5 @@ function respond(response_msg, res){
   res.end(response);
 }
 
-server.listen(8000);
+console.log("Listening on "+settings.at('listen_port'))
+server.listen(settings.at('listen_port'));
