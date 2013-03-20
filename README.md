@@ -5,12 +5,24 @@ HTTP API calls).
 
 # setup
 
+```
 $ git clone https://github.com/donpdonp/bouncy-job-queue.git
 $ cd bouncy-job-queue
 $ npm install
-$ node main.js
+```
 
+Start the HTTP listener
+```
+$ node main.js
+```
+
+Start a worker
+```
 $ node worker.js
 
-$ curl -X POST -d '{"method":"dosomething"}' http://localhost:8000/api
+```
 
+Start some work
+```
+$ curl -X POST -d '{"method":"dosomething"}' http://localhost:8000/api
+```
