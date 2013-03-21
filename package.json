@@ -1,13 +1,10 @@
 { "name": "apifeedr",
   "description": "feed api requests to a queue",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Don Park",
   "repository": {
       "type": "git",
       "url": "http://github.com/donpdonp/apifeedr.js.git"
-  },
-  "engines": {
-      "node": ">=0.8.8"
   },
   "main": "apifeedr",
   "dependencies": {
@@ -15,6 +12,11 @@
     "redis": "latest",
     "node-uuid": "latest",
     "bouncy": ">=2.1.0"
+  },
+  "devDependencies": {
+    "nodeunit": "latest"
+  },
+  "engines": {
+      "node": ">=0.8.8"
   }
-
 }
