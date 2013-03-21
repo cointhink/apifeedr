@@ -1,5 +1,5 @@
 { "name": "apifeedr",
-  "description": "feed api requests to a queue",
+  "description": "nodejs and redis based http api job queue/workers",
   "version": "0.1.0",
   "author": "Don Park",
   "repository": {
