@@ -11,18 +11,16 @@ var settings = edn.parse(fs.readFileSync('settings.edn', 'utf8'))
 
 var server = bouncy(function (req, res, bounce) {
   if (req.method == 'POST') {
-    if (req.url == '/api') {
-      request_body_read(req, function(body) {
-        var job = build_job(body)
-        if (job) {
-          farm_out(job, function(response_msg){
-            respond(response_msg, res)
-          })
-        } else {
-          error_respond(res)
-        }
-      })
-    }
+    request_body_read(req, function(body) {
+      var job = build_job(body)
+      if (job) {
+        farm_out(job, function(response_msg){
+          respond(response_msg, res)
+        })
+      } else {
+        error_respond(res)
+      }
+    })
   }
 })
 
