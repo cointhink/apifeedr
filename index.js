@@ -17,7 +17,4 @@ apifeedr.worker.setup = function(opts) {
   })
 }
 
-apifeedr.worker.listen = function(cb) {
-}
-
 exports = module.exports = apifeedr

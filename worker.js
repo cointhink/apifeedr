@@ -1,7 +1,3 @@
-var edn = require("jsedn");
-var redisLib = require("redis"),
-    redis_sub = redisLib.createClient(),
-    redis = redisLib.createClient()
 
 function work_jobs() {
   redis.llen('jobs', function(err,len){
@@ -31,11 +27,3 @@ function work_job(job) {
   redis.publish(job.at('id'), edn.encode(answer))
 }
 
-// see if there is something ready
-work_jobs()
-
-// wait for job notices
-redis_sub.subscribe('qtick')
-redis_sub.on('message', function(channel, msg){
-  work_jobs()
-})
