@@ -6,7 +6,7 @@
       "type": "git",
       "url": "http://github.com/donpdonp/apifeedr.js.git"
   },
-  "main": "apifeedr",
+  "main": "index",
   "dependencies": {
     "jsedn": "latest",
     "redis": "latest",
