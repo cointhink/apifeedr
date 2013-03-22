@@ -5,4 +5,3 @@ apifeedr = { worker: worker,
              queue: queue }
 
 module.exports = apifeedr
-
