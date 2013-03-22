@@ -1,22 +1,19 @@
-# bouncy-job-queue
+# apifeedr
 
-A nodejs and redis based job queue farming for the request/response pattern (notably
+A nodejs and redis based job farming library for the request/response pattern (notably
 HTTP API calls).
 
 # overview
 
-At some point it became apparent that a request into an api needed to be
+It became apparent that a request into an api needed to be
 its own object/concept in the system. Something persistent so it could be
 managed and logged.
 
 The nodejs 'bouncy' library answers http requests. The body of the request
-is parsed into an API call and put into a redis list. A redis pub/sub channel
-is notified of the new job. Another pub/sub channel is setup with the job id
-to receive the reply.
-
-Worker processes listen to the job annoucement channel, and pull a job off the
-list for processing. Once the result of the processing is obtained, the result
-is pushed into the pub/sub channel setup for that job.
+is parsed from json-rpc into an API call and put into a redis list. A redis
+pub/sub channel notifies the workers of a new job. Another pub/sub channel
+is setup with the job id to receive the reply from whichever worker ends
+up with the job.
 
 When the bouncy http request/response cycle receives the result, it sends
 the result in the HTTP response.
@@ -35,16 +32,28 @@ $ npm install
 
 Start the HTTP listener (at the web head)
 ```
+$ cat main.js
+apiqueue = require('apifeedr').queue
+apiqueue.setup().listen(8000)
+
 $ node main.js
 ```
 
-Start worker(s) (possibly on other boxes)
+Start worker(s) (possibly on multiple boxes)
 ```
+$ cat worker.js
+apiworker = require('apifeedr').worker
+apiworker.work((job_info, finisher)->
+  local_api_process.fire(job_info.msg, function(result){
+    finisher.emit('job_result', String(result))
+  })
+)
+
 $ node worker.js
 ```
 
 Start some work, using the JSON-RPC 2.0 format
 ```
 $ curl -X POST -d '{"jsonrpc":"2.0","method":"dosomething"}' http://localhost:8000/api
-{ "values":[1,2,3] }
+{ "jsonrpc":"2.0", "id":"aa62343b-9f77-4c4c-b5b8-dbee1d910849", "result":[1,2,3] }
 ```
