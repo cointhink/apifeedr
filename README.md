@@ -25,8 +25,8 @@ the atomicity of pulling jobs off the queue.
 # setup
 
 ```
-$ git clone https://github.com/donpdonp/bouncy-job-queue.git
-$ cd bouncy-job-queue
+$ git clone https://github.com/cointhink/apifeedr.git
+$ cd apifeedr
 $ npm install
 ```
 
