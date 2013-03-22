@@ -1,6 +1,4 @@
-var redisLib = require("redis");
 var fs = require('fs');
-var edn = require("jsedn");
 var bouncy = require('bouncy');
 var redisLib = require("redis");
 var uuid = require('node-uuid');
