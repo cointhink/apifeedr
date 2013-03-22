@@ -5,11 +5,9 @@ var bouncy = require('bouncy');
 var redisLib = require("redis");
 var uuid = require('node-uuid');
 
-var settings = edn.parse(fs.readFileSync('config/settings.edn', 'utf8'))
-
 apifeedr = { worker: {} }
 
-apifeedr.worker.setup = function() {
+apifeedr.worker.setup = function(opts) {
   var redis_sub = redisLib.createClient()
 
   // wait for job notices
