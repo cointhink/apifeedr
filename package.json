@@ -14,7 +14,7 @@
     "bouncy": ">=2.1.0"
   },
   "devDependencies": {
-    "nodeunit": "latest"
+    "jasmine-node": "latest"
   },
   "engines": {
       "node": ">=0.8.8"
