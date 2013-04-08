@@ -1,6 +1,6 @@
 { "name": "apifeedr",
   "description": "nodejs and redis based http api job queue/workers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Don Park",
   "repository": {
       "type": "git",
