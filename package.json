@@ -11,7 +11,7 @@
     "jsedn": ">=0.1.9",
     "redis": ">=0.8.2",
     "node-uuid": ">=1.4.0",
-    "bouncy": ">=2.1.0"
+    "bouncy": ">=2.x.x"
   },
   "devDependencies": {
     "jasmine-node": ">=1.4.0"
