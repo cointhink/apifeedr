@@ -8,13 +8,13 @@
   },
   "main": "index",
   "dependencies": {
-    "jsedn": "latest",
-    "redis": "latest",
-    "node-uuid": "latest",
+    "jsedn": ">=0.1.9",
+    "redis": ">=0.8.2",
+    "node-uuid": ">=1.4.0",
     "bouncy": ">=2.1.0"
   },
   "devDependencies": {
-    "jasmine-node": "latest"
+    "jasmine-node": ">=1.4.0"
   },
   "engines": {
       "node": ">=0.8.8"
